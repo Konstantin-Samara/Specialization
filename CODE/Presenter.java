@@ -25,36 +25,36 @@ public class Presenter {
 
 
                 for (int index = 0; index < 3; index++) {sub_types_int.add(index+1);}
-                type.setId(1); type.setName("Домашнее");type.setSub_types(sub_types_int);
+                type.setId(1); type.setName("Home");type.setSub_types(sub_types_int);
                 types.add(type);
                 type = new Type();
 
                 for (int index = 3; index < 6; index++) {sub_types_int1.add(index+1);}
-                type.setId(2); type.setName("Вьючное");type.setSub_types(sub_types_int1);
+                type.setId(2); type.setName("Work");type.setSub_types(sub_types_int1);
                 types.add(type);
 
-                sub_type.setId(1);sub_type.setName("Хомяк");
+                sub_type.setId(1);sub_type.setName("Humpster");
                 sub_types.add(sub_type);
                 sub_type = new Sub_type();
 
 
-                sub_type.setId(2);sub_type.setName("Кошка");
+                sub_type.setId(2);sub_type.setName("Cat");
                 sub_types.add(sub_type);
                 sub_type = new Sub_type();
 
-                sub_type.setId(3);sub_type.setName("Собака");
+                sub_type.setId(3);sub_type.setName("Dog");
                 sub_types.add(sub_type); 
                 sub_type = new Sub_type();
             
-                sub_type.setId(4);sub_type.setName("Лошадь");
+                sub_type.setId(4);sub_type.setName("Horse");
                 sub_types.add(sub_type);  
                 sub_type = new Sub_type();
             
-                sub_type.setId(5);sub_type.setName("Верблюд");
+                sub_type.setId(5);sub_type.setName("Camel");
                 sub_types.add(sub_type);  
                 sub_type = new Sub_type();
             
-                sub_type.setId(6);sub_type.setName("Осел");
+                sub_type.setId(6);sub_type.setName("Donkey");
                 sub_types.add(sub_type);}
 
                 Animal animal = new Animal();
@@ -105,8 +105,8 @@ public class Presenter {
 
     }
 
-    public void add_animal(ArrayList<String> list1) {
-
+    public String add_animal(ArrayList<String> list1) {
+        return models.add_animal(list1);
     }
 
     public void del_animal() {

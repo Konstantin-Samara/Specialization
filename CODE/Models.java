@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import Specialization.CODE.CLASSES.Animal;
 import Specialization.CODE.CLASSES.Reestr;
+import Specialization.CODE.CLASSES.Sub_type;
+import Specialization.CODE.CLASSES.Type;
 
 public class Models {
     Reestr r;
@@ -91,5 +93,50 @@ public ArrayList<String> get_animal_id(int id) {
         else {list.add("    ОТСУТСТВУЮТ");}}
     else {list.add("В реестре отсутствует животное с ID : "+id);}
     return list;}
+public String add_animal(ArrayList<String> list1) {
+    Animal animal = new Animal();
+    animal.setId(r.getMax_id_animals()+1);
+    animal.setSub_type(Integer.valueOf(list1.get(2)));
+    animal.setName(list1.get(4));
+    animal.setColor(list1.get(5));
+    if (Integer.valueOf(list1.get(6))==1) {animal.setMan(true);}
+    else {animal.setMan(false);}
+    animal.setBirth_year(Integer.valueOf(list1.get(7)));
+    animal.setBirth_month(Integer.valueOf(list1.get(8)));
+    ArrayList<String> comands = new ArrayList<>();
+    for (int i = 9; i < list1.size(); i++) {comands.add(list1.get(i));}
+    animal.setCommands(comands);
+    r.getAnimals().add(animal);
+    r.setMax_id_animals(r.getMax_id_animals()+1);
+    if (!list1.get(1).equals("")){
+        r.setMax_id_sub_types(r.getMax_id_sub_types()+1);
+        r.setMax_id_types(r.getMax_id_types()+1);
+        Sub_type new_sub_type = new Sub_type();
+        new_sub_type.setId(r.getMax_id_sub_types());
+        new_sub_type.setName(list1.get(3));
+        r.getSub_types().add(new_sub_type);
+        Type new_type = new Type();
+        new_type.setName(list1.get(1));
+        new_type.setId(Integer.valueOf(list1.get(0)));
+        new_type.getSub_types().add(Integer.valueOf(list1.get(2)));
+        r.getTypes().add(new_type);}
+    else {
+        if (!list1.get(3).equals("")){
+            Sub_type new_sub_type = new Sub_type();
+            r.setMax_id_sub_types(r.getMax_id_sub_types()+1);
+            new_sub_type.setId(r.getMax_id_sub_types());
+            new_sub_type.setName(list1.get(3));
+            r.getSub_types().add(new_sub_type);
+            int a = Integer.valueOf(list1.get(0));
+            int b = Integer.valueOf(list1.get(2));
+            r.getTypes().get(a).getSub_types().add(b);}
+        }
+    return animal_short_str(r.getMax_id_animals());
+    
+
+
+
+    
+}
 
 }

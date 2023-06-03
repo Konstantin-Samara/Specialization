@@ -11,7 +11,7 @@ import Specialization.CODE.MENU_COMMANDS.Get_animal_id;
 import Specialization.CODE.MENU_COMMANDS.Option;
 import Specialization.CODE.MENU_COMMANDS.Read;
 import Specialization.CODE.MENU_COMMANDS.Write;
-import Specialization.CODE.VIEW_MODELS.Add_Animal;
+import Specialization.CODE.VIEW_MODELS.Add;
 
 public class View {
     Presenter p;
@@ -87,17 +87,28 @@ public void get_all_reestr() {
         System.out.println(list.get(i));}}
 
 public void add_animal() {
-    Add_Animal add1 = new Add_Animal(this);
+    Add add1 = new Add(this);
     ArrayList<String> list = new ArrayList<>();
     list = add1.add(this.p); 
+    String str;
     System.out.println(list.toString());
-    p.add_animal(list);
+    str = p.add_animal(list);
+    System.out.println("\nЖивотное\n"+str+"\nуспешно добавлено в реестр.");
 }
 public String get_new_sub_type() {
-    System.out.print("\nУкажите название нового вида животных : ");
-    scan = new Scanner(System.in);
+    Boolean test = true;
     String new_sub_type = "";
-    new_sub_type = scan.nextLine();
+
+    while (test) {
+        test = false;
+        System.out.print("\nУкажите название нового вида животных : ");
+        scan = new Scanner(System.in);
+        new_sub_type = scan.nextLine();
+        for (int i = 0; i < p.reestr.getSub_types().size(); i++) {
+            if (p.reestr.getSub_types().get(i).getName().equals(new_sub_type)){
+                test = true;
+                System.out.println("\nТакое название уже содержится в реестре видов,");
+                System.out.println("Попробуйте еще раз.");}}}
     return new_sub_type;}
 
 public void del_animal() {
