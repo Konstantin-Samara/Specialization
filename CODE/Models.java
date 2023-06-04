@@ -9,7 +9,8 @@ import Specialization.CODE.CLASSES.Type;
 
 public class Models {
     Reestr r;
-
+    Boolean del_subt = false;
+    Boolean del_t = false;
     public Models(Reestr reestr) {
         this.r = reestr;
     }
@@ -22,11 +23,19 @@ public String get_str_sub_type_id(int sel) {
             str = r.getSub_types().get(i).getName();}}
     return str;}
 
+
 public int get_ind_of_id(int id) {
     int ind = -1;
     for (int i = 0; i < r.getAnimals().size(); i++) {
         if (r.getAnimals().get(i).getId()==id){ind = i;}}
     return ind;}
+
+public int get_ind_type_id_type(int id) {
+    int ind = -1;
+    for (int i = 0; i < r.getTypes().size(); i++) {
+        if (r.getTypes().get(i).getId()==id) {ind = i;}}
+    return ind;
+}
 
 public String get_str_type_id(int sel) {
     String str="";
@@ -37,7 +46,7 @@ public String get_str_type_id(int sel) {
                 str = r.getTypes().get(i).getName();}}}
     return str;} 
 
-public int get_int_type_id(int sel) {
+public int get_id_type_id(int sel) {
     int int_type = 0;
     int ind = get_ind_of_id(sel);
     for (int i = 0; i < r.getTypes().size(); i++) {
@@ -131,12 +140,84 @@ public String add_animal(ArrayList<String> list1) {
             int b = Integer.valueOf(list1.get(2));
             r.getTypes().get(a).getSub_types().add(b);}
         }
-    return animal_short_str(r.getMax_id_animals());
-    
+    return animal_short_str(r.getMax_id_animals());}
+
+public String del_animal1(int id) {
+    del_subt = false;
+    del_t = false;
+    String str = "";
+    int ind = get_ind_of_id(id);
+    int sub_type = r.getAnimals().get(ind).getSub_type();
+    if (ind<0){str = "Животного с данным ID("+id+") нет в реестре.";}
+    else {
+        str = "Животное "+animal_short_str(id)+"\nбудет удалено из реестра.";
+        int count = 0;
+        for (int i = 0; i < r.getAnimals().size(); i++) {
+            if (sub_type==r.getAnimals().get(i).getSub_type()){count++;}}
+        if (count==1){
+            str = str+"\nЭто единственный экземпляр вида ("+get_str_sub_type_id(id)+
+            ") в реестре.\nДанный вид также будет удален из реестра.";
+            del_subt = true;
+
+            if (r.getTypes().get(get_ind_type_id_type(get_id_type_id(id))).getSub_types().size()==1){
+                str = str+"\nВид ("+get_str_sub_type_id(id)+") также единственный в типе ("
+                +get_str_type_id(id)+")\nи данный тип будет удален из реестра.";
+                del_t = true;}}}
+    return str;}
+
+public String del_animal2(int id) {
+    int id_del_subtype = r.getAnimals().get(get_ind_of_id(id)).getSub_type();
+    int ind_del_subtype=0;
+    for (int i = 0; i < r.getSub_types().size(); i++) {
+        if (id_del_subtype==r.getSub_types().get(i).getId()){ind_del_subtype = i;}}
+    int ind_del_type = get_ind_type_id_type(get_id_type_id(id));
+    int max_id_animals=0;
+    int max_id_types=0;
+    int max_id_sub_types=0;
+    String str="";
+    String str1="";
+
+    str = "Животное "+animal_short_str(id);
+    str1 = "о";
+    r.getAnimals().remove(get_ind_of_id(id));
+    for (int i = 0; i < r.getAnimals().size(); i++) {
+        if (r.getAnimals().get(i).getId()>max_id_animals)
+            {max_id_animals = r.getAnimals().get(i).getId();}
+    r.setMax_id_animals(max_id_animals);}
+
+    if (del_subt) {
+        // нужно кдалить из типа(листа субтипов)
+        str = str+", вид "+r.getSub_types().get(ind_del_subtype).getName();
+        str1 = "ы";
+
+        r.getSub_types().remove(ind_del_subtype);
+        for (int i = 0; i < r.getSub_types().size(); i++) {
+            if (r.getSub_types().get(i).getId()>max_id_sub_types)
+                {max_id_sub_types = r.getSub_types().get(i).getId();}}
+        r.setMax_id_sub_types(max_id_sub_types);
+
+        int ind_subtype_in_type=-1;
+        for (int i = 0; i < r.getTypes().get(ind_del_type).getSub_types().size(); i++) {
+            if (r.getTypes().get(ind_del_type).getSub_types().get(i)==id_del_subtype)
+                {ind_subtype_in_type = i;}}
+        r.getTypes().get(ind_del_type).getSub_types().remove(ind_subtype_in_type);}
 
 
 
-    
-}
+    if (del_t) {
+        str = str+", тип "+r.getTypes().get(ind_del_type).getName();
+        r.getTypes().remove(ind_del_type);
+        for (int i = 0; i < r.getTypes().size(); i++) {
+            if (r.getTypes().get(i).getId()>max_id_types)
+                {max_id_types = r.getTypes().get(i).getId();}}
+        r.setMax_id_types(max_id_types);}
+    str = str+"\nуспешно удален"+str1+" из реестра."; 
+    return str;}
 
+// public String new_command(int id, ArrayList<String> comand_list) {
+//     for (int i = 0; i < comand_list.size(); i++) {
+//         r.getAnimals().get(get_ind_of_id(id)).getCommands().add(comand_list.get(i));}
+
+//     return "\nКоманды успешно добавлены.";
+// }
 }

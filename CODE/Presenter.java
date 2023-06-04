@@ -14,75 +14,75 @@ public class Presenter {
 
 
     public void PressButton() {
-        ArrayList<Type> types = new ArrayList<>();
-        ArrayList<Sub_type> sub_types = new ArrayList<>();
+        // ArrayList<Type> types = new ArrayList<>();
+        // ArrayList<Sub_type> sub_types = new ArrayList<>();
 
-                {Type type = new Type();
+        //         {Type type = new Type();
 
-                Sub_type sub_type = new Sub_type();
-                ArrayList<Integer> sub_types_int = new ArrayList<>();
-                ArrayList<Integer> sub_types_int1 = new ArrayList<>();
-
-
-                for (int index = 0; index < 3; index++) {sub_types_int.add(index+1);}
-                type.setId(1); type.setName("Home");type.setSub_types(sub_types_int);
-                types.add(type);
-                type = new Type();
-
-                for (int index = 3; index < 6; index++) {sub_types_int1.add(index+1);}
-                type.setId(2); type.setName("Work");type.setSub_types(sub_types_int1);
-                types.add(type);
-
-                sub_type.setId(1);sub_type.setName("Humpster");
-                sub_types.add(sub_type);
-                sub_type = new Sub_type();
+        //         Sub_type sub_type = new Sub_type();
+        //         ArrayList<Integer> sub_types_int = new ArrayList<>();
+        //         ArrayList<Integer> sub_types_int1 = new ArrayList<>();
 
 
-                sub_type.setId(2);sub_type.setName("Cat");
-                sub_types.add(sub_type);
-                sub_type = new Sub_type();
+        //         for (int index = 0; index < 3; index++) {sub_types_int.add(index+1);}
+        //         type.setId(1); type.setName("Home");type.setSub_types(sub_types_int);
+        //         types.add(type);
+        //         type = new Type();
 
-                sub_type.setId(3);sub_type.setName("Dog");
-                sub_types.add(sub_type); 
-                sub_type = new Sub_type();
+        //         for (int index = 3; index < 6; index++) {sub_types_int1.add(index+1);}
+        //         type.setId(2); type.setName("Work");type.setSub_types(sub_types_int1);
+        //         types.add(type);
+
+        //         sub_type.setId(1);sub_type.setName("Humpster");
+        //         sub_types.add(sub_type);
+        //         sub_type = new Sub_type();
+
+
+        //         sub_type.setId(2);sub_type.setName("Cat");
+        //         sub_types.add(sub_type);
+        //         sub_type = new Sub_type();
+
+        //         sub_type.setId(3);sub_type.setName("Dog");
+        //         sub_types.add(sub_type); 
+        //         sub_type = new Sub_type();
             
-                sub_type.setId(4);sub_type.setName("Horse");
-                sub_types.add(sub_type);  
-                sub_type = new Sub_type();
+        //         sub_type.setId(4);sub_type.setName("Horse");
+        //         sub_types.add(sub_type);  
+        //         sub_type = new Sub_type();
             
-                sub_type.setId(5);sub_type.setName("Camel");
-                sub_types.add(sub_type);  
-                sub_type = new Sub_type();
+        //         sub_type.setId(5);sub_type.setName("Camel");
+        //         sub_types.add(sub_type);  
+        //         sub_type = new Sub_type();
             
-                sub_type.setId(6);sub_type.setName("Donkey");
-                sub_types.add(sub_type);}
+        //         sub_type.setId(6);sub_type.setName("Donkey");
+        //         sub_types.add(sub_type);}
 
-                Animal animal = new Animal();
-                animal.setId(1);
-                animal.setName("Хома");
-                animal.setBirth_month(5);
-                animal.setBirth_year(1995);
-                animal.setColor("белый");
-                animal.setSub_type(1);
-                animal.setMan(false);
-                reestr.getAnimals().add(animal);
+        //         Animal animal = new Animal();
+        //         animal.setId(1);
+        //         animal.setName("Хома");
+        //         animal.setBirth_month(5);
+        //         animal.setBirth_year(1995);
+        //         animal.setColor("белый");
+        //         animal.setSub_type(1);
+        //         animal.setMan(false);
+        //         reestr.getAnimals().add(animal);
 
 
-                animal = new Animal();
-                animal.setId(3);
-                animal.setName("Саддам");
-                animal.setBirth_month(7);
-                animal.setBirth_year(2010);
-                animal.setColor("коричневый");
-                animal.setSub_type(5);
-                animal.setMan(true);
-                reestr.getAnimals().add(animal);
+        //         animal = new Animal();
+        //         animal.setId(3);
+        //         animal.setName("Саддам");
+        //         animal.setBirth_month(7);
+        //         animal.setBirth_year(2010);
+        //         animal.setColor("коричневый");
+        //         animal.setSub_type(5);
+        //         animal.setMan(true);
+        //         reestr.getAnimals().add(animal);
 
-        reestr.setMax_id_animals(3);
-        reestr.setTypes(types);
-        reestr.setSub_types(sub_types);
-        reestr.setMax_id_sub_types(6);
-        reestr.setMax_id_types(2);
+        // reestr.setMax_id_animals(3);
+        // reestr.setTypes(types);
+        // reestr.setSub_types(sub_types);
+        // reestr.setMax_id_sub_types(6);
+        // reestr.setMax_id_types(2);
         view.main_menu();
     }
 
@@ -100,20 +100,19 @@ public class Presenter {
 
     }
 
+     
     public void close() {
         System.out.println("\nДо встречи!");
-
     }
-
     public String add_animal(ArrayList<String> list1) {
         return models.add_animal(list1);
     }
-
-    public void del_animal() {
-        System.out.println("\nУдалить животное.");
-
+    public String del_animal1(int id) {
+        return models.del_animal1(id);
     }
-
+    public String del_animal2(int id) {
+        return models.del_animal2(id);
+    }
     public ArrayList<String> get_animal_id(int id) {
         return models.get_animal_id(id);
 
