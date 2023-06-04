@@ -1,0 +1,8 @@
+{
+    "java.project.sourcePaths": [
+        "CODE/MENU_COMMANDS",
+        "CODE/CLASSES",
+        "CODE/VIEW_MODELS",
+        "CODE"
+    ]
+}
